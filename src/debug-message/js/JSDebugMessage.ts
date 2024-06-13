@@ -117,9 +117,11 @@ export class JSDebugMessage extends DebugMessage {
       'wrapLogMessage' | 'insertEmptyLineAfterLogMessage'
     >,
   ): string {
-    const fileName = document.fileName.includes('/')
-      ? document.fileName.split('/')[document.fileName.split('/').length - 1]
-      : document.fileName.split('\\')[document.fileName.split('\\').length - 1];
+      const pathSegments = document.fileName.includes('/')
+      ? document.fileName.split('/')
+      : document.fileName.split('\\');
+      const fileName = pathSegments.slice(-2).join('/');
+
     const funcThatEncloseTheVar: string = this.enclosingBlockName(
       document,
       lineOfSelectedVar,
