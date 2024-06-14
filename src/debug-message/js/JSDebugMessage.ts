@@ -117,10 +117,10 @@ export class JSDebugMessage extends DebugMessage {
       'wrapLogMessage' | 'insertEmptyLineAfterLogMessage'
     >,
   ): string {
-      const pathSegments = document.fileName.includes('/')
+    const pathSegments = document.fileName.includes('/')
       ? document.fileName.split('/')
       : document.fileName.split('\\');
-      const fileName = pathSegments.slice(-2).join('/');
+    const fileName = pathSegments.slice(-2).join('/');
 
     const funcThatEncloseTheVar: string = this.enclosingBlockName(
       document,
@@ -161,12 +161,12 @@ export class JSDebugMessage extends DebugMessage {
     }${
       extensionProperties.insertEnclosingFunction
         ? funcThatEncloseTheVar.length > 0
-          ? `${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
+          ? `func: ${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
           : ''
         : ''
-    }${selectedVar}${extensionProperties.logMessageSuffix}${
+    }var: ${selectedVar}${extensionProperties.logMessageSuffix}${
       extensionProperties.quote
-    }, ${selectedVar})${semicolon}`;
+    }, {${selectedVar}})${semicolon}`;
   }
 
   private emptyBlockDebuggingMsg(
